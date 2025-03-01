@@ -14,6 +14,7 @@
 // Modules and libraries
 #include "Arduino.h"
 #include "Mainlight.hpp"
+#include "Ambientlight.hpp"
 
 
 bool isValid = false;
@@ -41,8 +42,14 @@ void setup() {
     passed += 1;
   }
   isValid = Serial;
+  if (!isValid)
+  {
+    Serial.println("Serial connection invalid!");
+  }
 }
 void loop() {
+  if (!isValid) { return; }
+
   if (Serial.available()) {
     char receivedKey = Serial.read();
     
